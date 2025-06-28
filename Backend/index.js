@@ -12,14 +12,15 @@ import applyRoute from "./route/apply.route.js";
 dotenv.config();
 const app = express();
 
+// ✅ Load from .env
 const PORT = process.env.PORT || 4001;
-const URI = process.env.MongoDBURI;
+const URI = process.env.MONGODB_URI;
 
 // ✅ CORS for both LOCAL + LIVE
 app.use(cors({
   origin: [
-    "http://localhost:5173", // local frontend
-    "https://skill-cart-frontend.vercel.app" // live frontend
+    "http://localhost:5173",               // Local frontend
+    "https://skill-cart-frontend.vercel.app" // Live frontend
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
@@ -27,21 +28,21 @@ app.use(cors({
 
 app.use(express.json());
 
-// Routes
+// ✅ Routes
 app.use("/book", bookRoute);
 app.use("/user", userRoute);
 app.use("/api/contact", contactRoute);
 app.use("/api/order", orderRoute);
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static("uploads")); // For resume uploads
 app.use("/api/apply", applyRoute);
 
-// ✅ Root check
+// ✅ Root check (for Render health check)
 app.get("/", (req, res) => {
   res.send("✅ SkillCart Backend is Running");
 });
 
-// ✅ Connect to MongoDB Atlas and start the server
-mongoose.connect(MongoDBURI)
+// ✅ Connect MongoDB and start server
+mongoose.connect(URI)
   .then(() => {
     console.log("✅ Connected to MongoDB Atlas");
     app.listen(PORT, () => {
@@ -51,6 +52,3 @@ mongoose.connect(MongoDBURI)
   .catch((err) => {
     console.error("❌ MongoDB Connection Error:", err);
   });
-
-
-
