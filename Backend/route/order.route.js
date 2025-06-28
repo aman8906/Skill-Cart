@@ -1,5 +1,5 @@
 import express from "express";
-import Order from "../models/order.model.js"; // ✅ Ensure path is correct: 'models', not 'model'
+import Order from "../model/order.model.js"; // ✅ Ensure path is correct: 'models', not 'model'
 
 const router = express.Router();
 
