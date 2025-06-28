@@ -20,7 +20,9 @@ const URI = process.env.MONGODB_URI;
 app.use(cors({
   origin: [
     "http://localhost:5173",               // Local frontend
-    "https://skill-cart-frontend.vercel.app" // Live frontend
+    "https://skill-cart-frontend.vercel.app",
+    "https://skill-cart-frontend-git-main-aman-chaurasiyas-projects-6313e18b.vercel.app",
+    "https://skill-cart-frontend-lvy4xrvzs.vercel.app" // Live frontend
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
