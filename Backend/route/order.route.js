@@ -1,11 +1,12 @@
-
 import express from "express";
 import Order from "../model/order.model.js";
 const router = express.Router();
 
-// ✅ POST: Place an order (Free or Paid)
+// POST: Place an order (Free or Paid)
 router.post("/", async (req, res) => {
   try {
+    console.log("📦 Incoming order:", req.body); // ✅ Debug log
+
     const { userId, name, price, status } = req.body;
 
     if (!userId || !name || price === undefined) {
@@ -27,7 +28,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// ✅ GET: Orders by user
+// GET: Orders by user
 router.get("/", async (req, res) => {
   const { userId } = req.query;
   if (!userId) return res.status(400).json({ message: "Missing userId" });
@@ -42,4 +43,3 @@ router.get("/", async (req, res) => {
 });
 
 export default router;
-
