@@ -1,19 +1,13 @@
-
-
 import mongoose from "mongoose";
 
-const orderSchema = new mongoose.Schema({
-  courseId: Number,
-  name: String,
-  price: Number,
-  userId: String,
-  status: {
-    type: String,
-    default: "Placed",
+const orderSchema = new mongoose.Schema(
+  {
+    userId: { type: String, required: true },
+    name: { type: String, required: true },
+    price: { type: Number, required: true },
+    status: { type: String, default: "Placed" },
   },
-}, { timestamps: true }); // ✅ Adds createdAt & updatedAt
+  { timestamps: true } // ✅ Needed for createdAt
+);
 
-const Order = mongoose.model("Order", orderSchema);
-export default Order;
-
-
+export default mongoose.model("Order", orderSchema);
